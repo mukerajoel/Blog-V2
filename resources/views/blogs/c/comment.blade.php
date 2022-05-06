@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Create a Commment') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('c.save') }}">
+                    <form method="POST" action="{{ route('c.save', $blogs->id) }}">
                         @csrf
 
                         <div class="row mb-3">
@@ -24,7 +24,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <input type="hidden" name="question_id" value="">
+                        <input type="hidden" name="question_id" value="{{$blogs->id}}">
 
 
                         <div class="row mb-0">

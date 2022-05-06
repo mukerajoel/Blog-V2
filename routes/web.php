@@ -25,8 +25,8 @@ Route::get('/blog/{id}', [App\Http\Controllers\BlogsController::class, 'show'])-
 Route::get('/blog/edit/{id}', [App\Http\Controllers\BlogsController::class, 'edit'])->name('b.edit');
 Route::post('/blog/{id}', [App\Http\Controllers\BlogsController::class, 'update'])->name('b.update');
 Route::delete('/blog/{id}', [App\Http\Controllers\BlogsController::class, 'destroy'])->name('b.destroy');
-Route::get('/comment', [App\Http\Controllers\BlogsController::class, 'comment'])->name('comment');
-Route::post('/comment', [App\Http\Controllers\BlogsController::class, 'commentSave'])->name('c.save');
+Route::get('/comment/{id}', [App\Http\Controllers\BlogsController::class, 'comment'])->name('comment');
+Route::post('/comment/{id}', [App\Http\Controllers\BlogsController::class, 'commentSave'])->name('c.save');
 
 
 

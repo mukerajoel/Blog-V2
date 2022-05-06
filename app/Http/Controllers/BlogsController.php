@@ -54,8 +54,9 @@ class BlogsController extends Controller
     public function show($id)
     {
         $blogs = Blog::find($id);
+        $comment = Comment::find($id);
         
-        return view('blogs.show', ['blogs'=>$blogs]);
+        return view('blogs.show', ['blogs'=>$blogs], ['comment'=>$comment]);
     }
 
     /**
@@ -67,7 +68,7 @@ class BlogsController extends Controller
     public function edit($id)
     {
         $blog = Blog::find($id);
-        return view('blogs.update', ['blog' => $blog]);
+        return view('blogs.update')->with('blog', $blog);
     }
 
     /**
@@ -89,12 +90,13 @@ class BlogsController extends Controller
 
      /**
      * Show the form for creating a new resource.
-     *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function comment()
+    public function comment($id)
     {
-        return view('blogs.c.comment');
+        $blogs = Blog::find($id);
+        return view('blogs.c.comment', ['blogs' => $blogs]);
     }
 
     /**
@@ -104,15 +106,15 @@ class BlogsController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-   public function commentSave(Request $request)
+   public function commentSave(Request $request, $id)
    {
-       //$comment = Blog::find($id);
+       $blogs = Blog::find($id);
        $comment = new Comment;
        $comment->body = $request->input('body');
-      // $comment->question_id = $request->input('question_id');
+       $comment->question_id = $request->input('question_id');
        $comment->save();
 
-       return redirect()->route('home');
+       return redirect()->route('home', ['blogs' => $blogs]);
    }
 
     /**

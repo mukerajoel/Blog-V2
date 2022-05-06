@@ -8,13 +8,23 @@
             <div class="justify-content-center" >{{ $blogs->title}}</div>
         <div class="justify-content-center" >{{ $blogs->body}}</div>
         <hr>
+
         <div>
-            <a href="{{route('comment')}}">comment</a>
+            
+            <div>{{$comment['body']}}</div>
+                
+           
+            
+
+        </div>
+
+        <div>
+            <a href="{{route('comment', $blogs->id)}}">comment</a>
         </div>
             
 
     <div>
-        <button><a href="">Edit</a></button>
+        <button><a href="{{route('b.edit', $blogs->id)}}">Edit</a></button>
         <form method="POST" action="{{ route('b.destroy', $blogs->id) }}">
             @csrf
             @method("DELETE")
